@@ -2,7 +2,7 @@ Ground Rules
 =======
 
 * We prefer well-thought-out solutions over the quick-and-dirty kind. So take your time, if you need it. A rushed job is usually matched by a swift rejection.
-* Submission is done via a [git format-patch](https://git-scm.com/docs/git-format-patch). Send your patch to devops@omise.co 
+* Submission is done via a [git format-patch](https://git-scm.com/docs/git-format-patch). Send your patch to saiqulhaq@hungryhub.com 
 
 
 Context
@@ -36,7 +36,7 @@ How to proceed
 1) Clone this repository to your local machine or fork to a private repository.
 2) Write the code.
 3) Write the documentation.
-4) Submit your **patch file** to devops@omise.co
+4) Submit your **patch file** to saiqulhaq@hey.com
 
 Time limit
 ===========
