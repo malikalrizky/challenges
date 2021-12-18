@@ -7,7 +7,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.0'
 gem 'sass-rails', '~> 5.0'
-gem 'sqlite3'
+gem 'postgresql'
 gem 'uglifier', '>= 1.3.0'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -22,7 +22,7 @@ group :test do
   gem 'selenium-webdriver'
 end
 gem 'bootstrap-sass'
-gem 'devise'
+gem 'devise', '4.5.0'
 gem 'high_voltage'
 gem 'jquery-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

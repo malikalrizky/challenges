@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: railsapp
+  labels:
+    app: railsapp
+data:
+  POSTGRESQL_DB: postgresdb
+  POSTGRESQL_USER_NAME: postgresadmin
+  POSTGRESQL_PASSWORD: azhari123
+  POSTGRESQL_HOST: postgres

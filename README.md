@@ -1,48 +1,28 @@
-Ground Rules
-=======
+1. Deploy database server postgresql with kubernetes
+  - There are several .yaml file for build postgresql
+	1. postrgres-config.yaml define user, password, and db into configmaps
+	2. postgres-storage.yaml configuration storage 5Gb for persisten volume and persistent volume claim
+	3. deployment.yaml for deploying postgresql using postgres-config and claim persistent volume
+	4. service.yaml to expose postgresql, using type NodePort and port 5432
 
-* We prefer well-thought-out solutions over the quick-and-dirty kind. So take your time, if you need it. A rushed job is usually matched by a swift rejection.
-* Submission is done via a [git format-patch](https://git-scm.com/docs/git-format-patch). Send your patch to saiqulhaq@hungryhub.com 
+  - Apply all of .yaml to kubernetes with command
+        1. kubectl apply -f postgres-config.yaml
+        2. kubectl apply -f postgres-storage.yaml
+        3. kubectl apply -f deployment.yaml
+        4. kubectl apply -f service.yaml
 
+2. Deploy apps to kubernetes
+  - In dockerfile apps there are some change:
+	1. installing postgresql-client
+        2. adding entrypoint script (entrypoint.sh) to make sure server.pid pre-exist not exist
+	3. push image docker with tag azhari7/rubyapps:latest
+  - In database.yaml change adapter to postgresql and adding host,user,password.
+  - Make configmaps to manage env apps including host,user and password database.
+  - Make service.yaml file to expose apps
+  - Make deployment.yaml file to deploy using name: railsapp using image azhari7/rubyapps:latest
+  - Do db:migrate to postgresql
 
-Context
-=======
-We have outsourced this application development to an external company. The application contains the following features:
-
- - Member sign up/sign in
- - Download documents
-
-The application was developed using Ruby on Rails.
-
-The application requires a database for storing data. 
-
-The default database in Rails is Sqlite, but needs to be changed to PostgreSQL, and support HA (high availability).
-
-Problem
-=======
-As an architect, you decide to deploy the application using Kubernetes and use PostgreSQL as the database.
-
-Instructions
-===========
-
- - Write scripts and yaml files, in order to run this application on a Kubernetes cluster, i.e. Helm charts or Kubernetes manifests.
- - Write scripts and yaml files, in order to setup PostgreSQL inside a Kubernetes cluster, optionally in High Availability mode, i.e. Patroni/Spilo with master/slave.
- - You may need to modify the application source code or configuration in order to make the application running on Kubernetes cluster, e.g. make use ENV variables in 12Factor style, create Dockerfile.
- - You have to write documentation and/or instructions about what you have done. This documents must detail steps for other DevOps to understand how to deploy this application and maintain it.
- - Do not make your code public.
-
-How to proceed
-===========
-1) Clone this repository to your local machine or fork to a private repository.
-2) Write the code.
-3) Write the documentation.
-4) Submit your **patch file** to saiqulhaq@hey.com
-
-Time limit
-===========
-There is no time limit as long as the job position remains vacant.
-
-Final step
-===========
-Successful candidates will be invited to an in-person interview.
-We may ask you more details of your code choices.
+  - Apply all of .yaml to kubernetes with comand
+       1. kubectl apply -f app-config.yaml
+       2. kubectl apply -f deployment.yaml
+       3. kubectl apply -f service.yaml

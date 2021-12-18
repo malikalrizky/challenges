@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: railsapp
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: railsapp
+    spec:
+      containers:
+      - name: railsapp
+        image: azhari7/railsapp:latest
+        ports:
+        - containerPort: 3000
+        envFrom:
+          - configMapRef
+              name: app-config
