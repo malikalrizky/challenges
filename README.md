@@ -6,29 +6,29 @@
 <br />
 
 
-**Tamboon React** is a code challenge for frontend developer.
+**Tamboon VueJS** is a code challenge for frontend developer.
 
 ## Scenario
-Once upon a time.. nope!  
+Once upon a time.. nope!
 So here, you have been temporarily hired by Omise and assigned to work on the charity donation project which the previously assigned front-end developer and designer got the urgent matters to solve, so they will not be able to finish the project on time..
 
 Fortunately, the API server is already done. You will need to grab on the requirements and complete the project while ensuring the application to have great engineering and well-design ✨
 
-![tamboon-react-screenshot](https://git.omise.co/storage/user/56/files/b407c6c4-ad09-11e7-8792-dc5b468333df)
+![tamboon-vue-screenshot](https://raw.githubusercontent.com/omise/challenges/challenge-react/resources/tamboon-react-screenshot.jpg)
 
 ## Mission
-Well, grap your guns, stock up your food and bring down your armor. We gonna need it for tonight!  
+Well, grap your guns, stock up your food and bring down your armor. We gonna need it for tonight!
 **Here are the tasks you must complete:**
 
-- [ ] Complete the application according to the design (image above).
-- [ ] Complete these features that are not in the design (you have freedom to design and position to display).
+- [ ] Design an application according to the design (image above).
   - Display all donation amount.
   - Display a message when paid.
 - [ ] Make the donation feature works correctly.
   - Amount in all donations should be displayed correctly despite users close and come back later.
   - Database (db.json) should have the new valid data when paid.
 - [ ] Refactor the code to be more readable and enhance reusability.
-- [ ] Use only [styled-component](https://www.styled-components.com/) for styling part.
+- [ ] Use only Tailwind CSS.
+- [ ] Use Vue3 Composition API
 - [ ] Write a nice commit message and order it well.
 - [ ] Display well in most modern browser (Google Chrome, Safari, Firefox).
 
@@ -40,22 +40,18 @@ Well, grap your guns, stock up your food and bring down your armor. We gonna nee
 Desire to win the war? Well, to make it a little more fun, please remember that
 
 **You cannot:**
-- Change existing behaviors.
 - Change the API server.
 - Change from JS to other languages.
 
 **In the other hand, feel free to:**
-- Improve the design to have better UI and UX.
-- Re-organize the codebase.
-- Create new modules/methods/components.
-- Modify existing code.
-- Add new packages.
-- Update `webpack` config.
-- Take reasonable time to complete the challenge, no need to rush.
 - Edit `README.md` to add documentation. What have you done or how to run or test your app?
 
 
 **Note**: You can see design inside folder `resources`.
+API server address:
+
+1. http://localhost:3001/charities
+2. http://localhost:3001/payments
 
 
 ## Surprise us!
