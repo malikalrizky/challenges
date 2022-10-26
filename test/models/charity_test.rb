@@ -12,7 +12,6 @@ class CharityTest < ActiveSupport::TestCase
 
   # FIXME There's a race condition in the credit_amount method
   test "that a charity total balance is correct even if credited from two different ruby objects" do
-
     charity   = charities(:children)
     conns     = ActiveRecord::Base.connection.pool.size - 1
 
@@ -25,7 +24,6 @@ class CharityTest < ActiveSupport::TestCase
     end
 
     threads.each(&:join)
-
     assert_equal conns * 1000, charity.reload.total
   end
 end
