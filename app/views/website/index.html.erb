@@ -2,18 +2,23 @@
 
   <p>Pick a charity:</p>
 
-  <ul>
+  <ul class="charities">
     <% @app.all_charities.each do |charity| %>
       <li>
-        <%= radio_button_tag :charity, charity.id %>
+        <%= radio_button_tag :charity, charity.id, false, class: 'radio_charity' %>
         <%= label_tag "charity_#{charity.id}", charity.name %>
       </li>
     <% end %>
   </ul>
 
   <div>
+    <%= check_box_tag 'charity', 'random', false, class: 'chk_random' %>
+    <%= label_tag 'charity', 'Random Charity' %>
+  </div>
+
+  <div>
     <%= label_tag :amount %><br>
-    <%= number_field_tag :amount, 500 %> THB
+    <%= number_field_tag :amount, 500, step: :any %> THB
   </div>
 
   <% if @token && @token.card.security_code_check %>
@@ -76,3 +81,23 @@
   </div>
 
 <% end %>
+
+<script>
+  charity_list = document.querySelector('.charities');
+  random = document.querySelector('.chk_random');
+  name_list = Array.from(document.querySelectorAll('.radio_charity'));
+
+  function clear(){
+    name_list.forEach((l) => {
+      l.checked = false;
+    })
+  }
+  random.addEventListener('change', function(){
+    if(this.checked) {
+      charity_list.style.display = 'none';
+      clear();
+    } else {
+      charity_list.style.display = 'block';
+    }
+  })
+</script>

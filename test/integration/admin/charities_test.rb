@@ -77,4 +77,22 @@ class Admin::CharitiesTest < ActionDispatch::IntegrationTest
     assert_equal "Elephant Nature Park", @_app.all_charities.last.name
     assert_equal 0, @_app.all_charities.last.total
   end
+
+  test "that the subunits amount are allowed" do
+    sign_in_user(users(:john).email, "helloworld")
+    get new_admin_charity_path
+
+    assert_difference "@_app.count_charities" do
+      post(admin_charities_path, params: {
+             charity: { name: "Elephant Nature Park" }
+           })
+      follow_redirect!
+    end
+
+    charity = @_app.all_charities.last
+
+    assert_equal t("admin.charities.create.success"), flash.notice
+    assert_equal "Elephant Nature Park", charity.name
+    assert_equal 0.0, charity.total.to_f
+  end
 end
