@@ -9,6 +9,12 @@
         <%= label_tag "charity_#{charity.id}", charity.name %>
       </li>
     <% end %>
+    <% if @app.all_charities.size > 0 %>
+      <li>
+        <%= radio_button_tag :charity, "random" %>
+        <%= label_tag "charity_random", "Randomly selected" %>
+      </li>
+    <% end %>
   </ul>
 
   <div>
@@ -48,7 +54,7 @@
 
     <div>
       Number<br>
-      <%= text_field_tag nil, nil, placeholder: "XXXX XXXX XXXX XXXX", data: { omise: "number" } %>
+      <%= text_field_tag nil, nil, size: 16, placeholder: "XXXX XXXX XXXX XXXX", data: { omise: "number" } %>
     </div>
 
     <div>
@@ -58,14 +64,14 @@
 
     <div>
       Expires<br>
-      <%= text_field_tag nil, nil, size: 4, placeholder: "XX", data: { omise: "expiration_month" } %>
+      <%= text_field_tag nil, nil, size: 2, placeholder: "XX", data: { omise: "expiration_month" } %>
       /
-      <%= text_field_tag nil, nil, size: 4, placeholder: "XX", data: { omise: "expiration_year" } %>
+      <%= text_field_tag nil, nil, size: 2, placeholder: "XX", data: { omise: "expiration_year" } %>
     </div>
 
     <div>
       Security Code<br>
-      <%= text_field_tag nil, nil, size: 8, placeholder: "XXX", data: { omise: "security_code" } %>
+      <%= text_field_tag nil, nil, size: 3, placeholder: "XXX", data: { omise: "security_code" } %>
     </div>
 
   <% end %>

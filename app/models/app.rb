@@ -21,4 +21,15 @@ class App
   def find_charity(id)
     Charity.find_by(id: id)
   end
+
+  def get_random_charity
+    charities = all_charities
+    charities[rand(0..charities.count-1)]
+  end
+
+  def create_user(attributes)
+    user = User.new(attributes)
+    user.save!
+    user
+  end
 end

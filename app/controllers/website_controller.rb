@@ -4,9 +4,9 @@ class WebsiteController < ApplicationController
   end
 
   def donate
-    charity = Charity.find_by(id: params[:charity])
-    if params[:omise_token].present?
+    if params[:omise_token].present? && params[:charity].present?
       unless params[:amount].blank? || params[:amount].to_i <= 20
+        charity = params[:charity] == "random" ? @app.get_random_charity : Charity.find_by(id: params[:charity])
         unless !charity
           if Rails.env.test?
             charge = OpenStruct.new({
@@ -21,8 +21,16 @@ class WebsiteController < ApplicationController
               description: "Donation to #{charity.name} [#{charity.id}]",
             })
           end
+
           if charge.paid
             charity.credit_amount(charge.amount)
+            flash.notice = t(".success")
+            redirect_to root_path
+          else
+            @token = nil
+            flash.now.alert = t(".failure")
+            render :index
+            return
           end
         else
           @token = retrieve_token(params[:omise_token])
@@ -41,20 +49,6 @@ class WebsiteController < ApplicationController
       flash.now.alert = t(".failure")
       render :index
       return
-    end
-    if !charity
-      @token = nil
-      flash.now.alert = t(".failure")
-      render :index
-      return
-    end
-    if charge.paid
-      flash.notice = t(".success")
-      redirect_to root_path
-    else
-      @token = nil
-      flash.now.alert = t(".failure")
-      render :index
     end
   end
 

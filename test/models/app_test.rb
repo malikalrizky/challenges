@@ -69,4 +69,10 @@ class AppTest < ActiveSupport::TestCase
 
     assert_equal charity.id, found_charity.id
   end
+
+  test "that wen can get a random charity" do
+    found_charity = @_app.get_random_charity
+
+    assert_equal charities.include?(found_charity), true
+  end
 end
