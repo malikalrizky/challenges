@@ -8,7 +8,7 @@
     name               = "challenge-cluster"
     location           = "asia-southeast2-a"
     initial_node_count = 3
-    min_master_version = data.google_container_engine_versions.default.latest_master_version
+    enable_autopilot = true
 
     node_config {
       machine_type = "e2-medium"
