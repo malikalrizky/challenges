@@ -24,26 +24,25 @@ jobs:
         with:
           #token_format: 'access_token'
           workload_identity_provider: 'projects/445787577000/locations/global/workloadIdentityPools/k8s-pool/providers/k8s-provider'
-          service_account: 'github@carbon-shadow-377208.iam.gserviceaccount.com'
+          service_account: 'github@$GCP_PROJECT_ID.iam.gserviceaccount.com'
       - uses: 'google-github-actions/setup-gcloud@v1'
       - name: Docker auth
         run: gcloud auth configure-docker
       - name: Build and push docker image 
         run: |
-          #docker build -t asia-southeast2-docker.pkg.dev/carbon-shadow-377208/challenge/challege:$IMAGE_TAG .
-          #docker push asia-southeast2-docker.pkg.dev/carbon-shadow-377208/challenge/challege:$IMAGE_TAG
+          #docker build -t asia-southeast2-docker.pkg.dev/$GCP_PROJECT_ID/challenge/challege:$IMAGE_TAG .
+          #docker push asia-southeast2-docker.pkg.dev/$GCP_PROJECT_ID/challenge/challege:$IMAGE_TAG
         working-directory: .
       - uses: hashicorp/setup-terraform@v2
       - name: Terraform init
-        run: echo ""
-        #run: terraform init # -backend-config="bucket=carbon-shadow-377208" -backend-config="prefix=k8s"
-        #working-directory: .
+        run: terraform init # -backend-config="bucket=carbon-shadow-377208" -backend-config="prefix=k8s"
+        working-directory: .
       - name: Terraform Plan
         run: |
           terraform plan -destroy \
           -var="region=asia-southeast2" \
           -var="project_id=carbon-shadow-377208" \
-          -var="container_image=asia-southeast2-docker.pkg.dev/carbon-shadow-377208/challenge/challege:latest" \
+          -var="container_image=asia-southeast2-docker.pkg.dev/$TF_STATE_BUCKET_NAME/challenge/challege:latest" \
           -out=PLAN
         working-directory: .
       - name: Terraform apply
