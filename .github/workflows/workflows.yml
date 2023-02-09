@@ -30,21 +30,21 @@ jobs:
         run: gcloud auth configure-docker
       - name: Build and push docker image 
         run: |
-          docker build -t asia-southeast2-docker.pkg.dev/carbon-shadow-377208/challenge/challege:$IMAGE_TAG .
-          docker push asia-southeast2-docker.pkg.dev/carbon-shadow-377208/challenge/challege:$IMAGE_TAG
+          #docker build -t asia-southeast2-docker.pkg.dev/carbon-shadow-377208/challenge/challege:$IMAGE_TAG .
+          #docker push asia-southeast2-docker.pkg.dev/carbon-shadow-377208/challenge/challege:$IMAGE_TAG
         working-directory: .
       - uses: hashicorp/setup-terraform@v2
       - name: Terraform init
         run: terraform init -backend-config="bucket=$TF_STATE_BUCKET_NAME" -backend-config="prefix=k8s"
-        working-directory: ./terraform
+        working-directory: .
       - name: Terraform Plan
         run: |
           terraform plan -destroy \
           -var="region="asia-southeast2" \
           -var="project_id=$GCP_PROJECT_ID" \
-          -var="container_image=us.gcr.io/$GCP_PROJECT_ID/challenge:$IMAGE_TAG" \
+          -var="container_image=asia-southeast2-docker.pkg.dev/carbon-shadow-377208/challenge/challege:latest" \
           -out=PLAN
-        working-directory: ./terraform
+        working-directory: .
       - name: Terraform apply
         run: terraform apply PLAN
-        working-directory: ./terraform
+        working-directory: .
