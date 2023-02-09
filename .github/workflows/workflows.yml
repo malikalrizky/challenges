@@ -35,6 +35,7 @@ jobs:
         working-directory: .
       - uses: hashicorp/setup-terraform@v2
       - name: Terraform init
+        run: echo ""
         #run: terraform init # -backend-config="bucket=carbon-shadow-377208" -backend-config="prefix=k8s"
         #working-directory: .
       - name: Terraform Plan
