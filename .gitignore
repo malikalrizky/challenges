@@ -10,6 +10,10 @@
 # http://github.com/RailsApps/rails-composer/issues
 #----------------------------------------------------------------------------
 
+#terraform
+/.terraform
+/.theia
+.terraform*
 # bundler state
 /.bundle
 /vendor/bundle/
