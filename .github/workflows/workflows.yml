@@ -41,8 +41,8 @@ jobs:
       - name: Terraform Plan
         run: |
           terraform plan -destroy \
-          -var="region="asia-southeast2" \
-          -var="project_id=$GCP_PROJECT_ID" \
+          -var="region=asia-southeast2" \
+          -var="project_id=carbon-shadow-377208" \
           -var="container_image=asia-southeast2-docker.pkg.dev/carbon-shadow-377208/challenge/challege:latest" \
           -out=PLAN
         working-directory: .
