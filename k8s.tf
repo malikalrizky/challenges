@@ -1,8 +1,8 @@
-resource "kubernetes_deployment" "challenge" {
+resource "kubernetes_deployment" "challege" {
   metadata {
-    name = "challenge"
+    name = "challege"
     labels = {
-      App = "challenge"
+      App = "challege"
     }
   }
 
@@ -10,19 +10,19 @@ resource "kubernetes_deployment" "challenge" {
     replicas = 1
     selector {
       match_labels = {
-        App = "challenge"
+        App = "challege"
       }
     }
     template {
       metadata {
         labels = {
-          App = "challenge"
+          App = "challege"
         }
       }
       spec {
         container {
           name = "challege"
-          image = "challege-:latest"
+          image = "challege:latest"
 
           port {
               container_port = 3000
