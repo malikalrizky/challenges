@@ -34,7 +34,7 @@ jobs:
       - name: Build and push docker image 
         run: |
           docker build -t asia.gcr.io/$GCP_PROJECT_ID/challege:$IMAGE_TAG .
-          docker push asia.gcr.io/$GCP_PROJECT_ID/challege:latest
+          docker push asia.gcr.io/$GCP_PROJECT_ID/challege:$IMAGE_TAG
         working-directory: .
       - uses: hashicorp/setup-terraform@v2
       - name: Terraform init
@@ -45,7 +45,7 @@ jobs:
           terraform plan -destroy \
           -var="region=asia-southeast2" \
           -var="project_id=$GCP_PROJECT_ID" \
-          -var="container_image=asia.gcr.io/$TF_STATE_BUCKET_NAME/challege:latest" \
+          -var="container_image=asia.gcr.io/$TF_STATE_BUCKET_NAME/challege:$IMAGE_TAG" \
           -out=PLAN
         working-directory: .
       - name: Terraform apply
