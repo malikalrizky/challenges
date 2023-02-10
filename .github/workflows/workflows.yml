@@ -39,19 +39,19 @@ jobs:
         #   docker build -t asia.gcr.io/$GCP_PROJECT_ID/challege:$IMAGE_TAG .
         #   docker push asia.gcr.io/$GCP_PROJECT_ID/challege:latest
         working-directory: .
-      # - name: Setup Terraform
-      # - uses: hashicorp/setup-terraform@v2
-      # - name: Terraform init
+      - name: Setup Terraform
+      - uses: hashicorp/setup-terraform@v2
+      - name: Terraform init
       #   run: terraform init # -backend-config="bucket=$$TF_STATE_BUCKET_NAME" -backend-config="prefix=k8s"
-      #   working-directory: .
-      # - name: Terraform Plan
+        working-directory: .
+      - name: Terraform Plan
       #   run: |
       #     terraform plan -destroy \
       #     -var="region=asia-southeast2" \
       #     -var="project_id=$GCP_PROJECT_ID" \
       #     -var="container_image=asia.gcr.io/$TF_STATE_BUCKET_NAME/challege:$latest" \
       #     -out=PLAN
-      #   working-directory: .
-      # - name: Terraform apply
+        working-directory: .
+      - name: Terraform apply
       #   run: terraform apply PLAN
-      #   working-directory: .
+        working-directory: .
