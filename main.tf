@@ -18,19 +18,21 @@
     ]
     }
 
+      lifecycle {
+          create_before_destroy = true
+      }
+
       provisioner "local-exec" {
       when    = destroy
       command = "sleep 90"
     }
 }
+
   resource "google_container_cluster" "default" {
     name               = "challenge-cluster"
     location           = "asia-southeast2-a"
     initial_node_count = 1
     enable_autopilot = true
-    node_locations = [
-    "asia-southeast2-a",
-  ]
 
   node_config {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
@@ -39,6 +41,5 @@
       "https://www.googleapis.com/auth/cloud-platform"
     ]
   }
-
 
 }
