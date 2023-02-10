@@ -53,5 +53,5 @@ jobs:
           -out=PLAN
         working-directory: .
       - name: Terraform apply
-        run: terraform apply PLAN -auto-approve
+        run: terraform apply PLAN 
         working-directory: .
