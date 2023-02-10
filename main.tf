@@ -8,6 +8,7 @@
     name               = "challenge-cluster"
     location           = "asia-southeast2-a"
     initial_node_count = 3
+    max_pods_per_node = 32
     enable_autopilot = true
 
     node_config {
