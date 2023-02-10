@@ -27,22 +27,23 @@ jobs:
           service_account: 'github@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com'
       - uses: 'google-github-actions/setup-gcloud@v1'
       - name: Docker auth
-        run: gcloud auth configure-docker
+        run: gcloud auth configure-docker \
+             asia-docker.pkg.dev
       - name: Build and push docker image 
         run: |
-          docker build -t asia.gcr.io/$GCP_PROJECT_ID/challenge/challege:$IMAGE_TAG .
-          docker push asia.gcr.io/$GCP_PROJECT_ID/challenge/challege:$IMAGE_TAG
+          docker build -t asia-docker.pkg.dev/$GCP_PROJECT_ID/challege:$IMAGE_TAG .
+          docker push asia-docker.pkg.dev/$GCP_PROJECT_ID/challege:$IMAGE_TAG
         working-directory: .
       - uses: hashicorp/setup-terraform@v2
       - name: Terraform init
-        run: terraform init # -backend-config="bucket=carbon-shadow-377208" -backend-config="prefix=k8s"
+        run: terraform init # -backend-config="bucket=$$TF_STATE_BUCKET_NAME" -backend-config="prefix=k8s"
         working-directory: .
       - name: Terraform Plan
         run: |
           terraform plan -destroy \
           -var="region=asia-southeast2" \
           -var="project_id=$GCP_PROJECT_ID" \
-          -var="container_image=asia.gcr.io/$TF_STATE_BUCKET_NAME/challenge/challege:$IMAGE_TAG" \
+          -var="container_image=asia-docker.pkg.dev/$TF_STATE_BUCKET_NAME/challege:$IMAGE_TAG" \
           -out=PLAN
         working-directory: .
       - name: Terraform apply
