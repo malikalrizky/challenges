@@ -38,7 +38,7 @@
     enable_autopilot = true
 
     lifecycle {
-      ignore_changes = true
+      ignore_changes = [all]
     }
 
   node_config {
