@@ -7,7 +7,7 @@
   resource "google_container_cluster" "default" {
     name               = "challenge-cluster"
     location           = "asia-southeast2-a"
-    initial_node_count = 3
+    initial_node_count = 1
     enable_autopilot = true
 
     node_config {
