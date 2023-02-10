@@ -4,10 +4,6 @@
   data "google_client_config" "current" {
   }
 
-  resource "google_service_account" "default" {
-  account_id   = "carbon-shadow-377208"
-  display_name = "github"
-}
   resource "google_container_node_pool" "default" {
   name       = "default-node-pool"
   cluster    = google_container_cluster.default.name
@@ -16,7 +12,7 @@
       node_config {
       machine_type = "e2-medium"
       disk_size_gb = 32
-      service_account = google_service_account.default.email
+      service_account = "github@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com"
       oauth_scopes    = [
       "https://www.googleapis.com/auth/cloud-platform"
     ]
@@ -38,7 +34,7 @@
 
   node_config {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    service_account = google_service_account.default.email
+    service_account = "github@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com"
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
     ]
