@@ -27,7 +27,7 @@
       when    = destroy
       command = "sleep 90"
     }
-
+}
   resource "google_container_cluster" "default" {
     name               = "challenge-cluster"
     location           = "asia-southeast2-a"
