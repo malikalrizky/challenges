@@ -32,6 +32,8 @@
     name               = "challenge-cluster"
     location           = "asia-southeast2-a"
     initial_node_count = 1
+    ip_allocation_policy {
+  }
     enable_autopilot = true
 
   node_config {
