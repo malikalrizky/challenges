@@ -30,8 +30,9 @@ jobs:
       #   run: gcloud auth activate-service-account github@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com --key-file=/home/malikalrizkya/service_user.json
       - uses: 'google-github-actions/setup-gcloud@v1'
       - name: Docker auth
-        run: gcloud auth configure-docker \
-             asia-docker.pkg.dev asia.grc.io
+        run: |
+          gcloud auth configure-docker asia-docker.pkg.dev 
+          gcloud auth configure-docker asia.gcr.io
       - name: Gcloud auth
         run: gcloud auth list
       - name: Build and push docker image 
