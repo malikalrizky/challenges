@@ -22,11 +22,12 @@ jobs:
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1'
         with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
           #token_format: 'access_token'
-          workload_identity_provider: 'projects/445787577000/locations/global/workloadIdentityPools/k8s-pool/providers/k8s-provider'
-          service_account: 'github@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com'
-      - name: Activate Service account
-        run: gcloud auth activate-service-account github@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com --key-file=/home/malikalrizkya/service_user.json
+          # workload_identity_provider: 'projects/445787577000/locations/global/workloadIdentityPools/k8s-pool/providers/k8s-provider'
+          # service_account: 'github@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com'
+      # - name: Activate Service account
+      #   run: gcloud auth activate-service-account github@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com --key-file=/home/malikalrizkya/service_user.json
       - uses: 'google-github-actions/setup-gcloud@v1'
       - name: Docker auth
         run: gcloud auth configure-docker \
