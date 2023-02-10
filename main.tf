@@ -30,7 +30,7 @@
 
   resource "google_container_cluster" "default" {
     name               = "challenge-cluster"
-    location           = "asia-southeast2-a"
+    location           = "asia-southeast2"
     initial_node_count = 1
     ip_allocation_policy {
   }
