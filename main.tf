@@ -8,7 +8,6 @@
     name               = "challenge-cluster"
     location           = "asia-southeast2-a"
     initial_node_count = 3
-    max_pods_per_node = 32
     enable_autopilot = true
 
     node_config {
@@ -21,3 +20,9 @@
       command = "sleep 90"
     }
   }
+
+resource "google_container_node_pool" "default" {
+  name       = "default-node-pool"
+  cluster    = google_container_cluster.default.name
+  max_pods_per_node = 32
+}
