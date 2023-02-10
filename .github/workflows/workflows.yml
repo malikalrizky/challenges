@@ -22,18 +22,20 @@ jobs:
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1'
         with:
-          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+          # credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
           #token_format: 'access_token'
-          # workload_identity_provider: 'projects/445787577000/locations/global/workloadIdentityPools/k8s-pool/providers/k8s-provider'
-          # service_account: 'github@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com'
+          workload_identity_provider: 'projects/445787577000/locations/global/workloadIdentityPools/k8s-pool/providers/k8s-provider'
+          service_account: 'github@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com'
       # - name: Activate Service account
       #   run: gcloud auth activate-service-account github@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com --key-file=/home/malikalrizkya/service_user.json
       - uses: 'google-github-actions/setup-gcloud@v1'
       - name: Docker auth
-        run: gcloud auth configure-docker \
-             asia-docker.pkg.dev
-      - name: Gcloud auth
-        run: gcloud auth list
+        run: gcloud auth print-access-token | docker login -u oauth2accesstoken \
+            --password-stdin https://asia.gcr.io
+      #   run: gcloud auth configure-docker \
+      #        asia-docker.pkg.dev
+      # - name: Gcloud auth
+      #   run: gcloud auth list
       - name: Build and push docker image 
         run: |
           docker build -t asia.gcr.io/$GCP_PROJECT_ID/challege:$IMAGE_TAG .
