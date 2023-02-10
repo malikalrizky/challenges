@@ -8,4 +8,5 @@ COPY Gemfile Gemfile.lock /app/
 RUN gem install bundler -v 2.2.13
 RUN bundle install
 COPY . /app
+RUN bin/rails db:migrate RAILS_ENV=development
 CMD bundle exec rails s -p 3000 -b '0.0.0.0'
