@@ -6,13 +6,6 @@ resource "kubernetes_deployment" "challege" {
     }
   }
 
-  spec {
-    replicas = 1
-    selector {
-      match_labels = {
-        App = "challege"
-      }
-    }
     template {
       metadata {
         labels = {
