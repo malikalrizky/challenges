@@ -37,10 +37,6 @@
   }
     enable_autopilot = true
 
-    lifecycle {
-      ignore_changes = [all]
-    }
-
   node_config {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
     service_account = "github@carbon-shadow-377208.iam.gserviceaccount.com"
