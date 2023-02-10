@@ -4,25 +4,46 @@
   data "google_client_config" "current" {
   }
 
+  resource "google_service_account" "default" {
+  account_id   = "106019397210449976661"
+  display_name = "github"
+  email = github@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com
+}
+  resource "google_container_node_pool" "default" {
+  name       = "default-node-pool"
+  cluster    = google_container_cluster.default.name
+  max_pods_per_node = 32
+
+      node_config {
+      machine_type = "e2-medium"
+      disk_size_gb = 32
+      service_account = google_service_account.default.email
+      oauth_scopes    = [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ]
+    }
+
+      provisioner "local-exec" {
+      when    = destroy
+      command = "sleep 90"
+    }
+
   resource "google_container_cluster" "default" {
     name               = "challenge-cluster"
     location           = "asia-southeast2-a"
     initial_node_count = 1
     enable_autopilot = true
+    node_locations = [
+    "asia-southeast2-a",
+  ]
 
-    node_config {
-      machine_type = "e2-medium"
-      disk_size_gb = 32
-    }
-
-    provisioner "local-exec" {
-      when    = destroy
-      command = "sleep 90"
-    }
+  node_config {
+    # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
+    service_account = google_service_account.default.email
+    oauth_scopes = [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ]
   }
 
-resource "google_container_node_pool" "default" {
-  name       = "default-node-pool"
-  cluster    = google_container_cluster.default.name
-  max_pods_per_node = 32
+
 }
