@@ -7,7 +7,7 @@
   resource "google_service_account" "default" {
   account_id   = "106019397210449976661"
   display_name = "github"
-  email = "github@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com"
+  email = "github@carbon-shadow-377208.iam.gserviceaccount.com"
 }
   resource "google_container_node_pool" "default" {
   name       = "default-node-pool"
