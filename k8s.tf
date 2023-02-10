@@ -51,7 +51,7 @@ resource "kubernetes_deployment" "challege" {
 
     resource "kubernetes_service" "appservice" {
     metadata {
-      name = "nodeapp-lb-service"
+      name = "challege-lb-service"
     }
     spec {
       type             = "LoadBalancer"
@@ -61,7 +61,7 @@ resource "kubernetes_deployment" "challege" {
         target_port = 3000
       }
       selector = {
-        App  = "nodeapp"
+        App  = "challenge"
       }
     }
   }
