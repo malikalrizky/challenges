@@ -46,7 +46,7 @@ jobs:
         working-directory: .
       - name: Terraform Plan
         run: |
-          terraform plan -destroy \
+          terraform plan \
           -var="region=asia-southeast2" \
           -var="project_id=$GCP_PROJECT_ID" \
           -var="container_image=asia.gcr.io/$TF_STATE_BUCKET_NAME/challege:$IMAGE_TAG" \
