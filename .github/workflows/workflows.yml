@@ -33,8 +33,8 @@ jobs:
         run: gcloud auth list
       - name: Build and push docker image 
         run: |
-          docker push asia.gcr.io/$GCP_PROJECT_ID/challege:latest
           docker build -t asia.gcr.io/$GCP_PROJECT_ID/challege:$IMAGE_TAG .
+          docker push asia.gcr.io/$GCP_PROJECT_ID/challege:latest
         working-directory: .
       - uses: hashicorp/setup-terraform@v2
       - name: Terraform init
