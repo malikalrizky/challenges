@@ -5,7 +5,7 @@
   }
 
   resource "google_service_account" "default" {
-  account_id   = "${{ secrets.GCP_PROJECT_ID }}"
+  account_id   = "carbon-shadow-377208"
   display_name = "github"
 }
   resource "google_container_node_pool" "default" {
