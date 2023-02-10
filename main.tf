@@ -8,6 +8,7 @@
   name       = "default-node-pool"
   cluster    = google_container_cluster.default.name
   max_pods_per_node = 32
+  location = "asia-southeast2-a"
 
       node_config {
       machine_type = "e2-medium"
